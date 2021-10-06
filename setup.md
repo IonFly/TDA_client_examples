@@ -1,24 +1,37 @@
 # Setting Up The TD Ameritrade API
-TD Ameritrade has a software api for querying price data and executing trades. Conventiently, the Python library `tda-api` uses this backend for Python related experiments.
 
-- Initialize developer and trading accounts
-- Install libs
-- Obtain API token to interface with TDA backend
-- Run sample script to obtain price quote
+TD Ameritrade has a software API for querying price data and executing trades. Conveniently, the Python library `tda-api` uses this backend for Python related experiments.
 
-## Accounts Needed
+1. Initialize developer and trading accounts
+2. Install libs
+3. Obtain API token to interface with TDA backend
+4. Run sample script to obtain price quote
+
+## Required Accounts
+
 To start an application for TD Ameritrade, you will need
 
 - A trading account ( [Link](https://www.tdameritrade.com) )
 - A developer account ( [Link](https://developer.tdameritrade.com) )
 
-## Start an Application
+The developer account is used to create your own application that can access the TD Ameritrade API. A brokerage account
+is required to access TD Ameritrade products and services.
+
+## Create Application
+
 Please follow the sections for 'Creating a Developer Account' and 'Registering an App' ( [Reference](https://developer.tdameritrade.com/content/getting-started) )
 
+Once the application is created, a 'Consumer Key' will be generated for your application. This is your application's OAauth User ID
+which is also referenced as the `client_id` within the `POST /v1/oauth2/token` API call.
+Details about your applications such as App Name, Callback URL, purpose, and Order Limit can be changed at anytime.
+
 ## Python Installation
+
 The `tda-api` has a convenient how-to for installing the libraries. ( [Link](https://tda-api.readthedocs.io/en/stable/getting-started.html) ) The author leaves it to the user to install the version of Python, libraries, and virtual environment at their discretion.
 
-## Webdriver Installation
+## Quickstart
+
+### Webdriver Authentication
 
 **While a user could use the `tda.auth.client_from_manual_flow` method instead to bypass the need for a webdriver, instructions for how to setup for `tda.auth.client_from_login_flow` are included for completeness**
 
@@ -35,7 +48,7 @@ From here, the following script could be run:
 from selenium import webdriver
 import tda
 
-# Instatiate a webdriver
+# Instantiate a webdriver
 driver = webdriver.Chrome('./path/to/chromedriver')
 
 # Make a client, save token to path
@@ -53,11 +66,11 @@ tda.auth.client_from_login_flow(
     'token_baby' )
 ```
 
-The API key is generated when initializing an application through the developer portal, see section '## Start an Application' for instructions.
+The API key is generated when initializing an application through the developer portal, see section [Create Application](#create-application) for instructions.
 
 The user will be taken to a login screen, here use your trading account user/pass to authenticate (not the developer account).
 
-## Using the client_from_manual_flow method
+### Manual Authentication
 
 If one were not to desire fussing with webdrivers, they may also obtain a token by executing the following:
 
@@ -79,15 +92,15 @@ tda.auth.client_from_manual_flow(
 
 What this will do is form a URL that the user will then paste into the web browser of their choice. Follow the instructions and a token will be generated at the specified path.
 
-The API key is generated when initializing an application through the developer portal, see section '## Start an Application' for instructions.
+The API key is generated when initializing an application through the developer portal, see section [Create Application](#create-application) for instructions.
 
 The user will be taken to a login screen, here use your trading account user/pass to authenticate (not the developer account).
 
-## Run a Simple Client to Obtain Price Quotes
+### Fetch Price Quotes Example
 
 The following code snippet was borrowed and amplified from the `tda-api` readthedocs page. ( [Link](https://tda-api.readthedocs.io/en/stable/client.html) )
 
-Assuming the `api_key` and `token_path` are valid, the following should saved *APPL* price data to *report.json*.
+Assuming the `api_key` and `token_path` are valid, the following should save *APPL* historical price data to *report.json*.
 
 ``` python
 import httpx  # Original forgot import  =/
