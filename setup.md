@@ -38,9 +38,10 @@ The `tda-api` has a convenient how-to for installing the libraries. ( [Link](htt
 The not so obvious piece is the webdriver. While the `tda-api` does a fair job explaining how-to install Python and bindings, the webdriver must be installed separately.
 
 What the webdriver does, is map the python binding to a web browser. This is necessary, as the TD Ameritrade uses the browser session to athenticate the app/user.
+ChromeDriver uses the same version number scheme as Chrome. Select the version that matches your installed Chrome browser.
 
 - How to Webdriver ( [Link](https://sites.google.com/chromium.org/driver/getting-started) )
-- Driver download ( [Link](https://chromedriver.storage.googleapis.com/index.html?path=93.0.4577.63/) )
+- Driver download ( [Link](https://sites.google.com/chromium.org/driver/) )
 
 From here, the following script could be run:
 
