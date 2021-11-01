@@ -8,6 +8,7 @@ import sys
 import httpx
 from tda.auth import easy_client
 from tda.client import Client
+from datetime import datetime
 
 c = easy_client(
         api_key=str(sys.argv[1]),
@@ -23,7 +24,9 @@ for item in tickers:
                 period_type=Client.PriceHistory.PeriodType.DAY,
                 period=Client.PriceHistory.Period.ONE_DAY,
                 frequency_type=Client.PriceHistory.FrequencyType.MINUTE,
-                frequency=Client.PriceHistory.Frequency.EVERY_MINUTE)
+                frequency=Client.PriceHistory.Frequency.EVERY_MINUTE,
+                start_datetime=datetime.fromtimestamp(1635426000),
+                end_datetime=datetime.fromtimestamp(1635512400))
 
         assert resp.status_code == httpx.codes.OK
         history = resp.json()
